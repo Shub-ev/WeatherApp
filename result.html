@@ -50,11 +50,11 @@
 
 
     <script>
-        const apiKey = '8cd03677264e37de37f3ef6715c88e18';
+        const apiKey = '0175e97b8b4be819a5534b14be49f6e7';
 
         window.onload = function () {
             const cityName = localStorage.getItem("city");
-            const url = `http://api.weatherstack.com/current?access_key=${apiKey}&query=${cityName}`;
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`;
             const img = document.getElementById('img');
             // const weatherCond = document.getElementById("weatherCond");
             const temp = document.getElementById("temp");
@@ -80,14 +80,14 @@
                 .then(data => {
                     console.log(data);
 
-                    const weather = data.current.weather_descriptions[0];
-                    const temperature = data.current.temperature;
-                    const humidity = data.current.humidity;
-                    const visu = data.current.visibility;
+                    const weather = data.weather[0].description;
+                    const temperature = Math.floor(data.main.temp - 273);
+                    const humidity = data.main.humidity;
+                    const visu = data.visibility / 1000;
                     const tempP2 = temperature + 2;
                     const tempM2 = temperature - 2;
 
-                    console.log(weather);
+                    console.log(temperature);
                     console.log(visu);
                     // weatherCond.textContent = weather;
                     temp.textContent = temperature;
